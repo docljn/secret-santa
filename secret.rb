@@ -51,16 +51,17 @@ recipients.delete santa
 
 
 
-#then select a random recipient
+#then select a random recipient and remove it from the list of recipients (can't get two presents)
 opener = recipients.sample
+recipients.delete opener
 
 #add the pair to the hash
 list[santa] = opener
 
 
-#now givers is correct (one giver removed)
-#but recipients needs to have opener removed and santa added
-recipients.delete opener
+#now givers is correct (santa removed)
+#but recipients needs to have santa added (they haven't got a pressie yet)
+
 recipients << santa
 
 puts "List length: #{list.length}"
@@ -78,6 +79,11 @@ end
 
 p list
 
+
+#OK, I think an option to delete items from the arrays based on what is already in the hash might work better
+#I'm ending up with double santa/opener because you can be off the list of recipients
+#and still be on the list of givers, and vice versa
+#drat
 
 
 
