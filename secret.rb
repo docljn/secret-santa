@@ -18,7 +18,7 @@ people = ["John", "Lorna", "Frances", "Bine"]
 
 #create a giver<->recipient reference list (a hash) ready to use
 
-master_list = Hash.new
+list = Hash.new
 
 
 #PROCESS FOR GENERATING PAIRS
@@ -30,18 +30,29 @@ givers = people[0..-1]
 
 
 #I THINK this is where the repeat should come in....
+#maybe repeat until the length of the hash is equal to the length of people?
 
 
 #Use array.sample to select a random giver, 
 #and then array.delete to remove them from the list of givers
-
 santa = givers.sample
 givers.delete santa
 
 #now duplicate the santa list to give a list of potential recipients (can't be santa!!)
 #then select a random recipient
-
 recipients = givers[0..-1]
+opener = recipients.sample
+
+#add the pair to the hash
+list[santa]=opener
+
+#now givers is correct (one giver removed)
+#but recipients needs to have opener removed and santa added
+recipients.delete opener
+recipients << santa
+
+
+
 
 
 
