@@ -30,8 +30,14 @@ givers = people[0..-1]
 
 
 #I THINK this is where the repeat should come in....
-#maybe repeat until the length of the hash is equal to the length of people?
 
+
+
+#####getting somewhere, but I'm ending up with duplicate entries
+
+done = people.length
+
+loop do 
 
 #Use array.sample to select a random giver, 
 #and then array.delete to remove them from the list of givers
@@ -44,12 +50,28 @@ recipients = givers[0..-1]
 opener = recipients.sample
 
 #add the pair to the hash
-list[santa]=opener
+list[santa] = opener
 
 #now givers is correct (one giver removed)
 #but recipients needs to have opener removed and santa added
 recipients.delete opener
 recipients << santa
+
+break if done == list.length
+
+p givers
+p recipients
+p list
+
+
+
+end
+
+#ßp list
+
+
+
+
 
 
 
