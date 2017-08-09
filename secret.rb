@@ -23,51 +23,60 @@ list = Hash.new
 
 #PROCESS FOR GENERATING PAIRS
 
-#1: use the list of people to create a scratch list identical to the people: givers
+#1: use the list of people to create a scratch list identical to the people: givers and recipients
 #can't just make them equal as then you've modified both!!!!!
 
 givers = people[0..-1]
+recipients = people[0..-1]
 
 
 #I THINK this is where the repeat should come in....
 
 
 
-#####getting somewhere, but I'm ending up with duplicate entries
+#####LOOP starts here
 
 done = people.length
+puts "People length: #{people.length}"
 
 loop do 
 
 #Use array.sample to select a random giver, 
-#and then array.delete to remove them from the list of givers
+#and then array.delete to remove the giver (santa) from the list of givers
 santa = givers.sample
 givers.delete santa
 
-#now duplicate the santa list to give a list of potential recipients (can't be santa!!)
+#now delete santa from the list of recipients (can't give to yourself)
+recipients.delete santa  
+
+
+
 #then select a random recipient
-recipients = givers[0..-1]
 opener = recipients.sample
 
 #add the pair to the hash
 list[santa] = opener
+
 
 #now givers is correct (one giver removed)
 #but recipients needs to have opener removed and santa added
 recipients.delete opener
 recipients << santa
 
+puts "List length: #{list.length}"
+
 break if done == list.length
 
+puts "Santa: #{santa}"
 p givers
+puts "Opener: #{opener}"
 p recipients
-p list
 
 
 
 end
 
-#ßp list
+p list
 
 
 
