@@ -1,20 +1,33 @@
 #AIM
 
-#Part 1
+#Part 1: Done and in branch "master"
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
-#extension - Part 2: 
+#extension - Part 2:  - new branch created
 #if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
 
 #WORKING IDEAS HERE
 #could create more than one array, each with a family name, to separate out families
-#input would ask people to select which group they were part of, or to add a new group if not there?
+#maybe test first with A = ["a1", "a2", "a3"]; B = ["b1", "b2", "b3"]
+#then add C = ["c1", "c2"]
+
+#input (part3) would ask people to select which group they were part of, or to add a new group if not there?
+
 #difficult bit is going to be selecting from all other families so no pattern and no internal gifts
 
-#maybe start with one group as santas and the rest as recipients, and allocate randomly.
-#once no santas left, move onto next group of santas, and remainder of recipients plus original santas, less new santas
+#maybe start with one group as santas and the rest as recipients, and allocate randomly as with original idea.
+#once no santas left in original group, move onto next family/group of santas; 
+
+
+#MAYBE new recipients = (original recipient list) - (already received) - (new santas)
 #URK this is getting complicated!
+
+#still need a list of people who have already given/received to remove from the list
+#need to test what happens if groups/families are different sizes
+
+
 
 
 
