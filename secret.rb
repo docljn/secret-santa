@@ -11,7 +11,7 @@
 #WORKING IDEAS HERE
 #could create more than one array, each with a family name, to separate out families
 #maybe test first with A = ["a1", "a2", "a3"]; B = ["b1", "b2", "b3"]
-#then add C = ["c1", "c2"]
+#then add C = ["c1", "c2"] to get mismatch in group sizes
 
 #input (part3) would ask people to select which group they were part of, or to add a new group if not there?
 
@@ -54,22 +54,19 @@ loop do
 
 	#remove anyone who has already given a present from your list of potential santas
 	santas = givers - given
-	puts "Santas: #{santas}"
-
 	#Use array.sample to select a random giver
 	santa = santas.sample
 	#add the giver to the list of people who have given presents
 	given << santa
 
-	
 
 	#remove anyone who has already received a present from your list of potential openers
 	openers = recipients - received
-	#and delete santa from the list of recipients (can't give to yourself) 
+	#delete santa from the list of recipients (can't give to yourself) 
 	openers.delete santa
-	#then select a random recipient 
+	#select a random recipient 
 	opener = openers.sample
-	#and add the recipient to the list of people who have got presents
+	#add the recipient to the list of people who have got presents
 	received << opener
 
 
@@ -90,7 +87,7 @@ end
 
 
 #extension  - Part 3: 
-#create an input so that you can edit the list
+#create an input so that you can edit the list / save wishlists etc to file/database
 
 #extension  - part 4: 
 #the output will be blind, so that if you type in your name, you are given 
