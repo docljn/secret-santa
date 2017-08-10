@@ -29,6 +29,11 @@ list = Hash.new
 givers = people[0..-1]
 recipients = people[0..-1]
 
+#Also create two empty arrays to store the names you've used so that you don't use them again.
+
+given = []
+received = []
+
 
 #I THINK this is where the repeat should come in....
 
@@ -37,47 +42,46 @@ recipients = people[0..-1]
 #####LOOP starts here
 
 done = people.length
-puts "People length: #{people.length}"
 
 loop do 
 
-#Use array.sample to select a random giver, 
-#and then array.delete to remove the giver (santa) from the list of givers
-santa = givers.sample
-givers.delete santa
+	#remove anyone who has already given a present from your list of potential santas
+	santas = givers - given
+	puts "Santas: #{santas}"
 
-#now delete santa from the list of recipients (can't give to yourself)
-recipients.delete santa  
+	#Use array.sample to select a random giver
+	santa = santas.sample
+	#add the giver to the list of people who have given presents
+	given << santa
+	#delete the giver from the potential list of givers
+	
+
+	#remove anyone who has already given a present from your list of potential santas
+	openers = recipients - received
+	puts "Openers: #{openers}"
+	#and delete santa from the list of recipients (can't give to yourself) 
+	openers.delete santa
+	#then select a random recipient 
+	opener = openers.sample
+	#and add the recipient to the list of people who have got presents
+	received << opener
 
 
 
-#then select a random recipient and remove it from the list of recipients (can't get two presents)
-opener = recipients.sample
-recipients.delete opener
+	#add the pair to the hash
+	list[opener] = santa
 
-#add the pair to the hash
-list[santa] = opener
-
-
-#now givers is correct (santa removed)
-#but recipients needs to have santa added (they haven't got a pressie yet)
-
-recipients << santa
-
-puts "List length: #{list.length}"
 
 break if done == list.length
 
-puts "Santa: #{santa}"
-p givers
-puts "Opener: #{opener}"
-p recipients
-
-
+		puts "Santa: #{santa}"
+		#p givers
+		puts "Opener: #{opener}"
+		#p recipients
 
 end
 
-p list
+	p list
 
 
 #OK, I think an option to delete items from the arrays based on what is already in the hash might work better
