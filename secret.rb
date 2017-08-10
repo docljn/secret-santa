@@ -53,10 +53,10 @@ loop do
 	santa = santas.sample
 	#add the giver to the list of people who have given presents
 	given << santa
-	#delete the giver from the potential list of givers
+
 	
 
-	#remove anyone who has already given a present from your list of potential santas
+	#remove anyone who has already received a present from your list of potential recipients
 	openers = recipients - received
 	puts "Openers: #{openers}"
 	#and delete santa from the list of recipients (can't give to yourself) 
@@ -84,10 +84,6 @@ end
 	p list
 
 
-#OK, I think an option to delete items from the arrays based on what is already in the hash might work better
-#I'm ending up with double santa/opener because you can be off the list of recipients
-#and still be on the list of givers, and vice versa
-#drat
 
 
 
