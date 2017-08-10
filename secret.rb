@@ -1,4 +1,5 @@
 #AIM
+#Part 1
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
@@ -66,11 +67,14 @@ end
 
 
 
-#extension 1: if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+#extension - Part 2: 
+#if the people are in groups (families/teams etc, ensure that most gifts cross groups)
 
-#extension 2: create an input so that you can edit the list
+#extension  - Part 3: 
+#create an input so that you can edit the list
 
-#extension 3: the output will be blind, so that if you type in your name, you are given 
+#extension  - part 4: 
+#the output will be blind, so that if you type in your name, you are given 
 #the option to type in your wishlist, and then given
 #the name of your recipient and their wishlist
 
