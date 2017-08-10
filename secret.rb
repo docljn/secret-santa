@@ -74,10 +74,6 @@ loop do
 
 break if done == list.length
 
-		puts "Santa: #{santa}"
-		#p givers
-		puts "Opener: #{opener}"
-		#p recipients
 
 end
 
