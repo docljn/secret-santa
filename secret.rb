@@ -2,13 +2,7 @@
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
-#extension: create an input so that you can edit the list
 
-#extension: the output will be blind, so that if you type in your name, you are given 
-#the option to type in your wishlist, and then given
-#the name of your recipient and their wishlist
-
-#extension: if the people are in groups (families/teams etc, ensure that most gifts cross groups)
 
 
 #create a list of people (an array) 
@@ -33,14 +27,6 @@ recipients = people[0..-1]
 
 given = []
 received = []
-
-
-#I THINK this is where the repeat should come in....
-
-
-
-#####LOOP starts here
-
 done = people.length
 
 loop do 
@@ -56,9 +42,8 @@ loop do
 	#delete the giver from the potential list of givers
 	
 
-	#remove anyone who has already given a present from your list of potential santas
+	#remove anyone who has already received a present from your list of potential openers
 	openers = recipients - received
-	puts "Openers: #{openers}"
 	#and delete santa from the list of recipients (can't give to yourself) 
 	openers.delete santa
 	#then select a random recipient 
@@ -74,20 +59,23 @@ loop do
 
 break if done == list.length
 
-		puts "Santa: #{santa}"
-		#p givers
-		puts "Opener: #{opener}"
-		#p recipients
 
 end
 
 	p list
 
 
-#OK, I think an option to delete items from the arrays based on what is already in the hash might work better
-#I'm ending up with double santa/opener because you can be off the list of recipients
-#and still be on the list of givers, and vice versa
-#drat
+
+#extension 1: if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
+#extension 2: create an input so that you can edit the list
+
+#extension 3: the output will be blind, so that if you type in your name, you are given 
+#the option to type in your wishlist, and then given
+#the name of your recipient and their wishlist
+
+
+
 
 
 
