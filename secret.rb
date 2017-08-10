@@ -1,22 +1,31 @@
 #AIM
+
 #Part 1
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
+#extension - Part 2: 
+#if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
+#WORKING IDEAS HERE
+#could create more than one array, each with a family name, to separate out families
+#input would ask people to select which group they were part of, or to add a new group if not there?
+#difficult bit is going to be selecting from all other families so no pattern and no internal gifts
+
+#maybe start with one group as santas and the rest as recipients, and allocate randomly.
+#once no santas left, move onto next group of santas, and remainder of recipients plus original santas, less new santas
+#URK this is getting complicated!
+
 
 
 #create a list of people (an array) 
-
 people = ["John", "Lorna", "Frances", "Bine"]
 
-
 #create a giver<->recipient reference list (a hash) ready to use
-
 list = Hash.new
 
 
 #PROCESS FOR GENERATING PAIRS
-
 #1: use the list of people to create a scratch list identical to the people: givers and recipients
 #can't just make them equal as then you've modified both!!!!!
 
@@ -24,7 +33,6 @@ givers = people[0..-1]
 recipients = people[0..-1]
 
 #Also create two empty arrays to store the names you've used so that you don't use them again.
-
 given = []
 received = []
 done = people.length
@@ -52,7 +60,6 @@ loop do
 	received << opener
 
 
-
 	#add the pair to the hash
 	list[opener] = santa
 
@@ -67,8 +74,7 @@ end
 
 
 
-#extension - Part 2: 
-#if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
 
 #extension  - Part 3: 
 #create an input so that you can edit the list
