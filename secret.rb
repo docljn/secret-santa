@@ -2,13 +2,6 @@
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
-#extension: create an input so that you can edit the list
-
-#extension: the output will be blind, so that if you type in your name, you are given 
-#the option to type in your wishlist, and then given
-#the name of your recipient and their wishlist
-
-#extension: if the people are in groups (families/teams etc, ensure that most gifts cross groups)
 
 
 #create a list of people (an array) 
@@ -33,14 +26,6 @@ recipients = people[0..-1]
 
 given = []
 received = []
-
-
-#I THINK this is where the repeat should come in....
-
-
-
-#####LOOP starts here
-
 done = people.length
 
 loop do 
@@ -56,9 +41,8 @@ loop do
 
 	
 
-	#remove anyone who has already received a present from your list of potential recipients
+	#remove anyone who has already received a present from your list of potential openers
 	openers = recipients - received
-	puts "Openers: #{openers}"
 	#and delete santa from the list of recipients (can't give to yourself) 
 	openers.delete santa
 	#then select a random recipient 
@@ -78,6 +62,18 @@ break if done == list.length
 end
 
 	p list
+
+
+
+
+#extension 1: if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
+#extension 2: create an input so that you can edit the list
+
+#extension 3: the output will be blind, so that if you type in your name, you are given 
+#the option to type in your wishlist, and then given
+#the name of your recipient and their wishlist
+
 
 
 
