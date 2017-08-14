@@ -37,60 +37,76 @@
 #create a list of people (an array) 
 people = ["John", "Lorna", "Frances", "Bine"]
 
+#use the list of people to create a scratch list identical to the people: givers and recipients
+#can't just make them equal as then you've modified both!!!!!
+#givers = people[0..-1]
+#recipients = people[0..-1]
+#this is probably where you would mess about and make the split for
+#different tribes??
+
+
+
 #create a giver<->recipient reference list (a hash) ready to use
 list = Hash.new
 
-#PROCESS FOR GENERATING PAIRS
-#use the list of people to create a scratch list identical to the people: givers and recipients
-#can't just make them equal as then you've modified both!!!!!
 #Also create two empty arrays to store the names you've used so that you don't use them again.
-#because I need access to santa and opener outside the methods, I need to initialise them here
-#but I also need to access them within the method, so what do I do????
 given = []
 received = []
 done = people.length
-santa = 'santa'
-opener = 'opener'
 
-def choose_santa(people,given)
-	givers = people[0..-1]
-	p givers
-	santas = givers - given
-	p santas
-	santa = santas.sample
-	p santa
-end
+#def choose_santa(people,given)
+	#givers = people[0..-1]
+	#p givers
+	#santas = givers - given
+	#p santas
+	#santa = santas.sample
+	#p santa
+#end
 
-def choose_opener(people,received)
-	recipients = people[0..-1]
-	p recipients
-	openers = recipients - received
-	p openers
-	openers.delete santa
-	p openers
-	opener = openers.sample
-	p opener
+#def choose_opener(people,received)
+#	recipients = people[0..-1]
+#	p recipients
+#	openers = recipients - received
+#	p openers
+#	openers.delete santa
+#	p openers
+#	opener = openers.sample
+#	p opener
+#end
+
+def choose(available, used)
+	to_choose_from = available - used
+	chosen = to_choose_from.sample
+	chosen
 end
 
 loop do 
+	santa = choose(people, given)
 
-	choose_santa(people,given)
-	given << santa
-
-	choose_opener(people, received)
-	received << opener
-
+	#ensure that santa is removed from the list of potential recipients
+	#but only for each time through the loop
+	#so they are still available for the next iteration
+	recipients = people[0..-1]
+	recipients.delete santa
+	opener = choose(recipients, received)
+	
 	#add the pair to the hash
 	list[opener] = santa
+	#and remove from available people of each type
+	given << santa
+	received << opener
 
-break if done == list.length
+	
+	break if done == list.length
 
 
-end
+	end
 
-	p list
+p list
 
-
+#this has one major failing, which is that you can end up with an
+#odd man out at the end by chance
+#and I don't know how to solve that
 
 
 
