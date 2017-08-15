@@ -15,8 +15,6 @@
 
 #OR start thinking about objects instead:
 #person(name, clan, wishlist)??
-#and what about writing methods so that they can be reused.
-#that might mean a whole rewrite though....
 
 #difficult bit is going to be selecting from all other families so no pattern and no internal gifts
 
@@ -68,13 +66,10 @@ loop do
 	#and remove from available people of each type
 	given << santa
 	received << opener
-	p list
 
 	#this has one major failing, which is that you can end up with an
 	#odd man out at the end by chance
-
 	#to solve the problem of 'nil' when by chance a singleton is left over
-
 	if list.key?(nil) 
 		list = {}
 		given = []
@@ -85,6 +80,8 @@ loop do
 
 
 end
+
+
 
 p list
 
