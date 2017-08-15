@@ -9,18 +9,14 @@
 
 
 #WORKING IDEAS HERE
-#could create more than one array, each with a family name, to separate out families
-#maybe test first with a = ["a1", "a2", "a3"]; b = ["b1", "b2", "b3"]
-#then add C = ["c1", "c2"] to get mismatch in group sizes
 
-#OR start thinking about classes instead:
+#OR start thinking about classes:
 #person(name, clan, wishlist)??
 
 #difficult bit is going to be selecting from all other families so no pattern and no internal gifts
 
 #maybe start with one group as santas and the rest as recipients, and allocate randomly as with original idea.
 #once no santas left in original group, move onto next family/group of santas; 
-
 
 #MAYBE new recipients = (original recipient list) - (already received) - (new santas)
 #URK this is getting complicated!
@@ -31,9 +27,23 @@
 
 
 
-
+#this was when there was only one tribe: 
 #create a list of people (an array) 
-people = ["John", "Lorna", "Frances", "Bine"]
+#people = ["John", "Lorna", "Frances", "Bine"]
+
+#create several arrays, one for each tribe:
+a = ["a1", "a2", "a3"] 
+b = ["b1", "b2", "b3"]
+c = ["c1", "c2"]
+
+
+#sort tribes by size:
+tribes = [a,b,c] 
+sorted_tribes = tribes.sort_by(&:length)
+#you want to start with the smallest tribe as santa to minimise gifts within the tribe
+#so shortest tribe == tribes[0]
+
+people = a + b + c 
 
 #create a giver<->recipient reference list (a hash) ready to use
 list = Hash.new
@@ -49,7 +59,6 @@ def choose(available, used)
 end
 
 
-
 while list.length < done do 
 	santa = choose(people, given)
 
@@ -63,8 +72,7 @@ while list.length < done do
 	given << santa
 	received << opener
 
-	#this has one major failing, which is that you can end up with an
-	#odd man out at the end by chance
+	#this has one major failing: you can end up with an odd man out at the end by chance
 
 	#to solve the problem of 'nil' when by chance a singleton is left over
 	if list.key?(nil)
