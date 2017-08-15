@@ -44,20 +44,24 @@ given = []
 received = []
 done = people.length
 
+#def choose(available, used)
+#	to_choose_from = available - used
+#	chosen = to_choose_from.sample
+#	chosen
+#end
+
 def choose(available, used)
-	to_choose_from = available - used
-	chosen = to_choose_from.sample
-	chosen
+	chosen = (available - used).sample
 end
 
-loop do 
+
+
+while list.length < done do 
 	santa = choose(people, given)
 
-	#ensure that santa is removed from the list of potential recipients
-	#but only for each time through the loop
-	#so they are still available for the next iteration
+	#remove santa from the list of potential recipients
 	recipients = people[0..-1]
-	recipients.delete santa
+	recipients.delete(santa)
 
 	opener = choose(recipients, received)
 	
@@ -69,15 +73,13 @@ loop do
 
 	#this has one major failing, which is that you can end up with an
 	#odd man out at the end by chance
+
 	#to solve the problem of 'nil' when by chance a singleton is left over
-	if list.key?(nil) 
+	if list.key?(nil)
 		list = {}
 		given = []
 		received = []
 	end
-
-	break if done == list.length
-
 
 end
 
