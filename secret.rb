@@ -13,7 +13,7 @@
 #maybe test first with a = ["a1", "a2", "a3"]; b = ["b1", "b2", "b3"]
 #then add C = ["c1", "c2"] to get mismatch in group sizes
 
-#OR start thinking about objects instead:
+#OR start thinking about classes instead:
 #person(name, clan, wishlist)??
 
 #difficult bit is going to be selecting from all other families so no pattern and no internal gifts
@@ -43,12 +43,6 @@ list = Hash.new
 given = []
 received = []
 done = people.length
-
-#def choose(available, used)
-#	to_choose_from = available - used
-#	chosen = to_choose_from.sample
-#	chosen
-#end
 
 def choose(available, used)
 	chosen = (available - used).sample
