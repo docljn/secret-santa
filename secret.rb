@@ -60,9 +60,7 @@ while list.length < done do
 	santa = choose(people, given)
 
 	#remove santa from the list of potential recipients
-	recipients = people[0..-1]
-	recipients.delete(santa)
-
+	recipients = people-[santa]
 	opener = choose(recipients, received)
 	
 	#add the pair to the hash
