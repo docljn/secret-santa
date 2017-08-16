@@ -24,7 +24,7 @@ b = start_b.shuffle
 c = start_c.shuffle
 
 
-#sort tribes by size (biggest last):
+#sort tribes by size (biggest last): [ight be able to add the .shuffle to the array formation???]
 tribes = [a,b,c] 
 sorted_tribes = tribes.sort_by(&:length)
 
@@ -35,55 +35,23 @@ people = sorted_tribes.flatten
 
 
 
-#work out the offset range you are going to use when you rotate the array
-#to minimise matching within tribes
+#work out the offset range you are going to use when you rotate the array to minimise matching within tribes
 people_count = people.length
 
-min_offset = sorted_tribes[0].length
+min_offset = sorted_tribes[-1].length
+max_offset = sorted_tribes.length - min_offset
 
-
-#create a giver<->recipient reference list (a hash) ready to use
-list = Hash.new
-
-
-
-
-
-
-#Also create two empty arrays to store the names you've used 
-#so that you don't use them again.
-given = []
-received = []
-done = people.length
-
-def choose(available, used)
-	chosen = (available - used).sample
+if max_offset <= min_offset 
+	offset = min_offset
+else
+	offset = rand(min_offset..max_offset)
 end
 
+recipients = people.rotate(offset)
 
-while list.length < done do 
-	santa = choose(people, given)
 
-	#remove santa from the list of potential recipients
-	recipients = people-[santa]
-	opener = choose(recipients, received)
-	
-	#add the pair to the hash
-	list[opener] = santa
-	#and remove from available people of each type
-	given << santa
-	received << opener
-
-	#this has one major failing: you can end up with an odd man out at the end by chance
-
-	#to solve the problem of 'nil' when by chance a singleton is left over
-	if list.key?(nil)
-		list = {}
-		given = []
-		received = []
-	end
-
-end
+#create a giver<->recipient reference list 
+list = Hash[people.zip recipients]
 
 
 
