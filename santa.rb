@@ -4,6 +4,12 @@
 #Write a secret santa program to ensure that each person gives a gift to one other
 #and each person receives a gift from one other
 
+#original method had a major flaw: you can end up with an odd man out at the end by chance.
+
+#rethinking the basic approach.
+
+
+
 #extension - Part 2:  - new branch created
 #if the people are in groups (families/teams etc, ensure that most gifts cross groups)
 
