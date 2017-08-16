@@ -7,48 +7,48 @@
 #original method had a major flaw: you can end up with an odd man out at the end by chance.
 
 #rethinking the basic approach.
-
-
-
-#extension - Part 2:  - new branch created
-#if the people are in groups (families/teams etc, ensure that most gifts cross groups)
-
-
-#WORKING IDEAS HERE
-
-#OR start thinking about classes:
-#person(name, clan, wishlist)??
-
-#difficult bit is going to be selecting from all other families so no pattern and no internal gifts
-
-#maybe start with one group as santas and the rest as recipients, and allocate randomly as with original idea.
-#once no santas left in original group, move onto next family/group of santas; 
-
-#MAYBE new recipients = (original recipient list) - (already received) - (new santas)
-#URK this is getting complicated!
-
-#still need a list of people who have already given/received to remove from the list
-#need to test what happens if groups/families are different sizes
-
+#use .rotate method along with .shuffle method for arrays, and then pair up entire group.
 
 
 
 #create several arrays, one for each tribe:
-a = ["a1", "a2", "a3"] 
-b = ["b1", "b2", "b3"]
-c = ["c1", "c2"]
+start_a = ["a1", "a2", "a3"] 
+start_b = ["b1", "b2", "b3"]
+start_c = ["c1", "c2"]
 
 
-#sort tribes by size:
+#shuffle the members of each tribe to give a random order
+
+a = start_a.shuffle
+b = start_b.shuffle
+c = start_c.shuffle
+
+
+#sort tribes by size (biggest last):
 tribes = [a,b,c] 
 sorted_tribes = tribes.sort_by(&:length)
-#you want to start with the smallest tribe as santa to minimise gifts within the tribe
-#so shortest tribe == tribes[0]
 
-people = a + b + c 
+largest_tribe = sorted_tribes[-1]
+
+#list of all participants, in randomly ordered tribes
+people = sorted_tribes.flatten 
+
+
+
+#work out the offset range you are going to use when you rotate the array
+#to minimise matching within tribes
+people_count = people.length
+
+min_offset = sorted_tribes[0].length
+
 
 #create a giver<->recipient reference list (a hash) ready to use
 list = Hash.new
+
+
+
+
+
 
 #Also create two empty arrays to store the names you've used 
 #so that you don't use them again.
@@ -90,7 +90,25 @@ end
 p list
 
 
+#extension - Part 2:  - new branch created
+#if the people are in groups (families/teams etc, ensure that most gifts cross groups)
 
+
+#WORKING IDEAS HERE
+
+#OR start thinking about classes:
+#person(name, clan, wishlist)??
+
+#difficult bit is going to be selecting from all other families so no pattern and no internal gifts
+
+#maybe start with one group as santas and the rest as recipients, and allocate randomly as with original idea.
+#once no santas left in original group, move onto next family/group of santas; 
+
+#MAYBE new recipients = (original recipient list) - (already received) - (new santas)
+#URK this is getting complicated!
+
+#still need a list of people who have already given/received to remove from the list
+#need to test what happens if groups/families are different sizes
 
 
 
