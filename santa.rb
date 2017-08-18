@@ -38,6 +38,12 @@ class Person
 		@clan = clan
 		@wishlist = wishlist 
 	end
+	#that sets everything at initialization i.e. Person.new
+	#would it be better to just create a blank instance and then set all the attributes using user-input?
+	#then the name of the class instance could be auto-generated?
+
+	#need to be able to sort by clan, so do you create an array of clans too, and if so, when?
+	#presumably every time a user updates their 'clan' attribute?
 
 	def inspect
 		"#{@pname}"
@@ -75,6 +81,24 @@ c = [c1,c2]
 
 
 
+#find a way to extract the clan of each Person class instance?
+
+#sort by clan, or select by clan? 
+#If sorting by clan you wouldn't be able to use the existing method to find the biggest clan
+#and you wouldn't be able to shuffle the members randomly
+#so that would need a complete rethink
+
+#sorting by object attribute 
+#cf. https://stackoverflow.com/questions/882070/sorting-an-array-of-objects-in-ruby-by-object-attribute
+
+#or would it be better to put every person into a collection/array as soon as they were generated
+#so that you have your overall list without having to select it?
+#would that be part of initialize?
+#it would mean you'd not be able to delete anyone, though....
+#cf https://stackoverflow.com/questions/6365638/how-to-get-class-instances-in-ruby
+
+
+
 #create several arrays, one for each tribe:
 #a = ["a1", "a2", "a3"] 
 #b = ["b1", "b2", "b3"]
@@ -104,8 +128,8 @@ max_offset = people.length - min_offset
 
 if min_offset == people_count
 	offset = rand(1..min_offset)
-elsif if max_offset <= min_offset 
-	offset = min_offset
+elsif if max_offset <= min_offset #check this logic - need a test for this!!!!!!!
+	offset = min_offset           #not at all sure this will work as designed when ==
 else
 	offset = rand(min_offset..max_offset)
 end
