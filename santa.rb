@@ -16,37 +16,43 @@
 
 ####################
 
+#Part 3:
+#a way to link a name, clan and wishlist
+#data storage - YAML? need to learn about it and this seems like a good excuse
+
 #WORKING IDEAS HERE
 
-#Part 3:
-#a way to link a name, tribe and wishlist
-#data storage - YAML? need to learn about it and this seems like a good excuse
 #start thinking about classes?
-#person(name, clan, wishlist)??
+#Person(name, clan, wishlist)??
+#a way to select people by clan
+#how to find out what the clans are? 
+
+#but I want to get user input to create a person, HOW.
 
 class Person 
+ 
+	attr_accessor(:pname, :clan, :wishlist) 
 
-	attr_reader :name :tribe 
-	attr_accessor :wishlist 
-
-	def initialize(name, tribe, wishlist) #but I want to get user input to create these, HOW.
-		@name = name
-		@tribe = tribe
+	def initialize(pname, clan = "main", wishlist = "anything under £10")
+		@pname = pname
+		@clan = clan
 		@wishlist = wishlist 
 	end
 
-	def output_person
-
+	def inspect
+		"#{@pname} of clan #{@clan}"
 	end
 
+	def input_person
+	end
+
+	def output_person
+	end
 
 end
 
-def user_input(arg)
-	p "Please enter your #{arg}: "
-	arg = gets.chomp
-	arg
-end
+
+
 
 
 
@@ -101,8 +107,14 @@ p offset
 
 
 #extension  - Part 4: 
-#create an input so that you can edit the list / save wishlists etc to file/database
+#create an input so that you can edit the list
 #input would ask people to select which group they were part of, or to add a new group if not there?
+
+#def user_input(arg)
+#	puts "Please enter your #{arg}: "
+#	arg = gets.chomp
+#	arg
+#end
 
 
 #extension  - part 5: 
