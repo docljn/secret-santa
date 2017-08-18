@@ -9,8 +9,47 @@
 #rethinking the basic approach.
 #use .rotate method along with .shuffle method for arrays, and then pair up entire group.
 
+####################
+
 #Part 2: DONE
 #if the people are in groups (families/teams etc, ensure that most gifts cross groups)
+
+####################
+
+#WORKING IDEAS HERE
+
+#Part 3:
+#a way to link a name, tribe and wishlist
+#data storage - YAML? need to learn about it and this seems like a good excuse
+#start thinking about classes?
+#person(name, clan, wishlist)??
+
+class Person 
+
+	attr_reader :name :tribe 
+	attr_accessor :wishlist 
+
+	def initialize(name, tribe, wishlist) #but I want to get user input to create these, HOW.
+		@name = name
+		@tribe = tribe
+		@wishlist = wishlist 
+	end
+
+	def output_person
+
+	end
+
+
+end
+
+def user_input(arg)
+	p "Please enter your #{arg}: "
+	arg = gets.chomp
+	arg
+end
+
+
+
 
 
 
@@ -59,40 +98,14 @@ p offset
 
 
 
-#WORKING IDEAS HERE
 
-#extension  - Part 3: 
+
+#extension  - Part 4: 
 #create an input so that you can edit the list / save wishlists etc to file/database
 #input would ask people to select which group they were part of, or to add a new group if not there?
 
-#start thinking about classes:
-#person(name, clan, wishlist)??
 
-class Person 
-	attr_reader :name :tribe 
-	attr_accessor :wishlist 
-
-	def initialize(name, tribe, wishlist) #but I want to get user input to create these, HOW.
-		@name = name
-		@tribe = tribe
-		@wishlist = wishlist 
-	end
-
-	def output_person
-	end
-
-end
-
-def user_input(arg)
-		p "Please enter your #{arg}: "
-		arg = gets.chomp
-		arg
-	end
-
-
-#data storage - YAML? need to learn about it and this seems like a good excuse
-
-#extension  - part 4: 
+#extension  - part 5: 
 #the output will be blind, so that if you type in your name, you are given 
 #the option to type in/edit your wishlist, and then given
 #the name of your recipient and their current wishlist
