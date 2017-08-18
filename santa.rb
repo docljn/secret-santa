@@ -68,6 +68,28 @@ p offset
 #start thinking about classes:
 #person(name, clan, wishlist)??
 
+class Person 
+	attr_reader :name :tribe 
+	attr_accessor :wishlist 
+
+	def initialize(name, tribe, wishlist) #but I want to get user input to create these, HOW.
+		@name = name
+		@tribe = tribe
+		@wishlist = wishlist 
+	end
+
+	def output_person
+	end
+
+end
+
+def user_input(arg)
+		p "Please enter your #{arg}: "
+		arg = gets.chomp
+		arg
+	end
+
+
 #data storage - YAML? need to learn about it and this seems like a good excuse
 
 #extension  - part 4: 
