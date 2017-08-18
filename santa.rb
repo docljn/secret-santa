@@ -40,7 +40,7 @@ class Person
 	end
 
 	def inspect
-		"#{@pname} of clan #{@clan}"
+		"#{@pname}"
 	end
 
 	def input_person
@@ -57,17 +57,28 @@ a1 = Person.new("a1")
 a2 = Person.new("a2")
 a3 = Person.new("a3")
 
+b1 = Person.new("b1")
+b2 = Person.new("b2")
+b3 = Person.new("b3")
+
+c1 = Person.new("c1")
+c2 = Person.new("c2")
 
 
 
+
+#create arrays using your new people
+a = [a1,a2,a3]
+b = [b1,b2,b3]
+c = [c1,c2]
 
 
 
 
 #create several arrays, one for each tribe:
-a = ["a1", "a2", "a3"] 
-b = ["b1", "b2", "b3"]
-c = ["c1", "c2"]
+#a = ["a1", "a2", "a3"] 
+#b = ["b1", "b2", "b3"]
+#c = ["c1", "c2"]
 
 
 #shuffle the members of each tribe to give a random order
@@ -108,7 +119,7 @@ list = Hash[people.zip recipients]
 p list
 p offset 
 
-
+end
 
 
 
