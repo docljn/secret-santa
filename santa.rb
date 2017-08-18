@@ -52,6 +52,10 @@ class Person
 end
 
 
+#create some sample people:
+a1 = Person.new("a1")
+a2 = Person.new("a2")
+a3 = Person.new("a3")
 
 
 
@@ -80,12 +84,16 @@ people = sorted_tribes.flatten
 
 
 #work out the offset range you are going to use when you rotate the array to minimise matching within tribes
+#care: if there is only one tribe you need to allow for random offsets within that tribe
+#this will need to be tidied up - not sure if it will work when there is only one tribe!
 people_count = people.length
 
 min_offset = sorted_tribes[-1].length
 max_offset = people.length - min_offset
 
-if max_offset <= min_offset 
+if min_offset == people_count
+	offset = rand(1..min_offset)
+elsif if max_offset <= min_offset 
 	offset = min_offset
 else
 	offset = rand(min_offset..max_offset)
