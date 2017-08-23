@@ -39,70 +39,80 @@ class Person
 		@wishlist = wishlist 
 	end
 	#that sets everything at initialization i.e. Person.new
-	#would it be better to just create a blank instance and then set all the attributes using user-input?
-	#then the name of the class instance could be auto-generated?
-
-	#need to be able to sort by clan, so do you create an array of clans too, and if so, when?
-	#presumably every time a user updates their 'clan' attribute?
+	#I also want to shove the 'clan' into an array of clans at this stage HOW??
 
 	def inspect
 		"#{@pname}"
 	end
 
-	def input_person
+end
+
+#maybe a clan class, 
+#or would I be better off with a hash? that way I don't need to worry about names?
+class Clan
+	attr_accessor(:cname, :cmember)
+
+	def initialize(cname = "main")
+		@cname = cname
+		@cmember = cmember
 	end
 
-	def output_person
+	def inspect
+		"#{@cname}"
 	end
-
 end
 
 
+
 #create some sample people:
-a1 = Person.new("a1")
-a2 = Person.new("a2")
-a3 = Person.new("a3")
+#and give them different clan attributes based on symbols
+#this will eventually be done as part of accepting user data
 
-b1 = Person.new("b1")
-b2 = Person.new("b2")
-b3 = Person.new("b3")
+a1 = Person.new("a1", "a")
+a2 = Person.new("a2", "a")
+a3 = Person.new("a3", "a")
+a4 = Person.new("a4", "a")
 
-c1 = Person.new("c1")
-c2 = Person.new("c2")
+b1 = Person.new("b1", "b")
+b2 = Person.new("b2", "b")
+b3 = Person.new("b3", "b")
+
+c1 = Person.new("c1", "c")
+c2 = Person.new("c2", "c")
+
+#put them all in one array (this will eventually be done as part of creating Person.new)
+participants = [a1, a2, a3, a4, b1, b2, b3, c1, c2]
+p participants
+
+#put all the clans into an array so you know what you've got
+#(this will eventually bedone as part of creating Person.new)
+
+clans = ["a", "b", "c"]
+
+
+
+#number_clans = clans.length
+
+#select from participants so you have an array for each clan:
+#but how to set variable names on the fly - 
+#I won't know how many clans there are going to be
 
 
 
 
-#create arrays using your new people
-a = [a1,a2,a3]
+
+
+
+
+#create arrays using your new People instances - 
+#this is what the above method is supposed to do
+a = [a1,a2,a3,a4]
+
 b = [b1,b2,b3]
+
 c = [c1,c2]
 
 
-
-
-#find a way to extract the clan of each Person class instance?
-
-#sort by clan, or select by clan? 
-#If sorting by clan you wouldn't be able to use the existing method to find the biggest clan
-#and you wouldn't be able to shuffle the members randomly
-#so that would need a complete rethink
-
-#sorting by object attribute 
-#cf. https://stackoverflow.com/questions/882070/sorting-an-array-of-objects-in-ruby-by-object-attribute
-
-#or would it be better to put every person into a collection/array as soon as they were generated
-#so that you have your overall list without having to select it?
-#would that be part of initialize?
-#it would mean you'd not be able to delete anyone, though....
-#cf https://stackoverflow.com/questions/6365638/how-to-get-class-instances-in-ruby
-
-
-
-#create several arrays, one for each tribe:
-#a = ["a1", "a2", "a3"] 
-#b = ["b1", "b2", "b3"]
-#c = ["c1", "c2"]
 
 
 #shuffle the members of each tribe to give a random order
