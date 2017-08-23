@@ -44,6 +44,7 @@ class Person
 	def clan_collect
 		@clanspeople||={}
 		@clanspeople[pname] = clan
+		@clanspeople
 	end
 
 
@@ -77,15 +78,6 @@ end
 
 
 a1 = Person.new("a1", "a")
-p a1.pname
-p a1.clan
-a1.clan_collect
-puts "clanspeople"
-p @clanspeople
-#no error, but method doesn't seem to add anything to the hash: 
-#I'm getting 'nil' instead of an empty hash
-
-
 a2 = Person.new("a2", "a")
 a3 = Person.new("a3", "a")
 a4 = Person.new("a4", "a")
@@ -96,6 +88,14 @@ b3 = Person.new("b3", "b")
 
 c1 = Person.new("c1", "c")
 c2 = Person.new("c2", "c")
+
+p c2.pname
+p c2.clan
+p c2.clan_collect
+
+#but how to access "clanspeople" as the following gives "nil" instead of the 
+#hash I'm looking for
+p @clanspeople
 
 #put them all in one array (this will eventually be done as part of creating Person.new)
 participants = [a1, a2, a3, a4, b1, b2, b3, c1, c2]
@@ -117,7 +117,7 @@ clans = ["a", "b", "c"]
 
 
 
-#create arrays using your new People instances - 
+#create arrays using your new People instances - separated by clan
 #this is what the above method is supposed to do
 a = [a1,a2,a3,a4]
 
@@ -184,9 +184,10 @@ end
 
 
 #extension  - part 5: 
-#the output will be blind, so that if you type in your name, you are given 
-#the option to type in/edit your wishlist, and then given
-#the name of your recipient and their current wishlist
+#nake a single page website where you can add name, clan, email, wishlist and 
+#the result is emailed to all the participants
+#you'll still need an organiser, so the website won't store any user data once the emails
+#have been sent, as otherwise DPA gets involved???
 
 
 
