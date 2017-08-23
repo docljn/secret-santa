@@ -41,9 +41,16 @@ class Person
 	#that sets everything at initialization i.e. Person.new
 	#I also want to shove the 'clan' into an array of clans at this stage HOW??
 
+	def clan_collect
+		@clanspeople||={}
+		@clanspeople[pname] = clan
+	end
+
+
 	def inspect
 		"#{@pname}"
 	end
+
 
 end
 
@@ -65,10 +72,20 @@ end
 
 
 #create some sample people:
-#and give them different clan attributes based on symbols
+#and give them different clan attributes
 #this will eventually be done as part of accepting user data
 
+
 a1 = Person.new("a1", "a")
+p a1.pname
+p a1.clan
+a1.clan_collect
+puts "clanspeople"
+p @clanspeople
+#no error, but method doesn't seem to add anything to the hash: 
+#I'm getting 'nil' instead of an empty hash
+
+
 a2 = Person.new("a2", "a")
 a3 = Person.new("a3", "a")
 a4 = Person.new("a4", "a")
@@ -84,6 +101,7 @@ c2 = Person.new("c2", "c")
 participants = [a1, a2, a3, a4, b1, b2, b3, c1, c2]
 p participants
 
+
 #put all the clans into an array so you know what you've got
 #(this will eventually bedone as part of creating Person.new)
 
@@ -91,11 +109,6 @@ clans = ["a", "b", "c"]
 
 
 
-#number_clans = clans.length
-
-#select from participants so you have an array for each clan:
-#but how to set variable names on the fly - 
-#I won't know how many clans there are going to be
 
 
 
