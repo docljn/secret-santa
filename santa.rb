@@ -34,6 +34,8 @@ class Person
 	attr_accessor(:pname, :clan, :wishlist) 
 
 	def initialize(pname, clan = "main", wishlist = "anything under £10")
+		@@clans = []
+		@@members = {}
 		@pname = pname
 		@clan = clan
 		@wishlist = wishlist 
@@ -41,16 +43,26 @@ class Person
 	#that sets everything at initialization i.e. Person.new
 	#I also want to shove the 'clan' into an array of clans at this stage HOW??
 
-	def clan_collect
-		@clanspeople||={}
-		@clanspeople[pname] = clan
-		@clanspeople
-	end
-
-
 	def inspect
 		"#{@pname}"
 	end
+
+	def collect
+	@@members[pname] = clan
+	p @@members
+	end
+
+	#can I use the hash to create the list of clans somehow?
+	
+
+	def clan_collect
+		unless @@clans.include?(clan)
+		@@clans << clan
+		p @@clans
+		end
+	end
+
+
 
 
 end
@@ -68,7 +80,13 @@ class Clan
 	def inspect
 		"#{@cname}"
 	end
+
 end
+
+
+#METHODS BELONGING TO THE PROGRAM NOT THE CLASS!
+
+
 
 
 
@@ -78,6 +96,7 @@ end
 
 
 a1 = Person.new("a1", "a")
+
 a2 = Person.new("a2", "a")
 a3 = Person.new("a3", "a")
 a4 = Person.new("a4", "a")
@@ -89,18 +108,16 @@ b3 = Person.new("b3", "b")
 c1 = Person.new("c1", "c")
 c2 = Person.new("c2", "c")
 
-p c2.pname
-p c2.clan
-p c2.clan_collect
 
-#but how to access "clanspeople" as the following gives "nil" instead of the 
-#hash I'm looking for
-p @clanspeople
+a1.collect
+a1.clan_collect
+
+b1.collect
+b1.clan_collect
+
 
 #put them all in one array (this will eventually be done as part of creating Person.new)
 participants = [a1, a2, a3, a4, b1, b2, b3, c1, c2]
-p participants
-
 
 #put all the clans into an array so you know what you've got
 #(this will eventually bedone as part of creating Person.new)
