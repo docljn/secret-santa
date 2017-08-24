@@ -49,18 +49,23 @@ class Person
 
 	def collect
 	@@members[pname] = clan
-	p @@members
 	end
-
-	#can I use the hash to create the list of clans somehow?
-	
 
 	def clan_collect
 		unless @@clans.include?(clan)
 		@@clans << clan
-		p @@clans
 		end
+		p @@clans
 	end
+
+	def self.output_clans
+		@@clans
+	end
+
+	def self.output_members
+		@@members
+	end
+
 
 
 
@@ -96,33 +101,57 @@ end
 
 
 a1 = Person.new("a1", "a")
-
-a2 = Person.new("a2", "a")
-a3 = Person.new("a3", "a")
-a4 = Person.new("a4", "a")
-
-b1 = Person.new("b1", "b")
-b2 = Person.new("b2", "b")
-b3 = Person.new("b3", "b")
-
-c1 = Person.new("c1", "c")
-c2 = Person.new("c2", "c")
-
-
 a1.collect
 a1.clan_collect
 
+a2 = Person.new("a2", "a")
+a2.collect
+a2.clan_collect
+
+a3 = Person.new("a3", "a")
+a3.collect
+a3.clan_collect
+
+b1 = Person.new("b1", "b")
 b1.collect
 b1.clan_collect
 
+b2 = Person.new("b2", "b")
+b2.collect
+b2.clan_collect
+
+b3 = Person.new("b3", "b")
+b3.collect
+b3.clan_collect
+
+c1 = Person.new("c1", "c")
+c1.collect
+c1.clan_collect
+
+c2 = Person.new("c2", "c")
+c2.collect
+c2.clan_collect
+
+
+
+
+
+clans = Person.output_clans
+p clans
+
+
+
+
+
 
 #put them all in one array (this will eventually be done as part of creating Person.new)
-participants = [a1, a2, a3, a4, b1, b2, b3, c1, c2]
+participants = [a1, a2, a3, b1, b2, b3, c1, c2]
 
 #put all the clans into an array so you know what you've got
 #(this will eventually bedone as part of creating Person.new)
 
-clans = ["a", "b", "c"]
+#commented out to test clan_collect result
+#clans = ["a", "b", "c"]
 
 
 
@@ -136,7 +165,7 @@ clans = ["a", "b", "c"]
 
 #create arrays using your new People instances - separated by clan
 #this is what the above method is supposed to do
-a = [a1,a2,a3,a4]
+a = [a1,a2,a3]
 
 b = [b1,b2,b3]
 
