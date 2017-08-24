@@ -34,8 +34,8 @@ class Person
 	attr_accessor(:pname, :clan, :wishlist) 
 
 	def initialize(pname, clan = "main", wishlist = "anything under £10")
-		@@clans = []
-		@@members = {}
+		@@clans ||= []
+		@@members ||= {}
 		@pname = pname
 		@clan = clan
 		@wishlist = wishlist 
@@ -133,14 +133,8 @@ c2.collect
 c2.clan_collect
 
 
-
-
-
 clans = Person.output_clans
 p clans
-
-
-
 
 
 
