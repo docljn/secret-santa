@@ -43,23 +43,38 @@ class Person
 	end
 
 
-
-	def inspect
-		"#{@pname}"
+	def add
+		collect
+		clan_collect
 	end
 
 
-	#this doesn't do what I want it to
-	def collect
-	@@members << self
-	end
 
 
 	def clan_collect
 		unless @@clans.include?(clan)
 		@@clans << clan
 		end
-		p @@clans
+	end
+
+
+	def collect
+	@@members << self
+	end
+
+
+	def details
+		"clan: #{clan}, pname: #{pname}, wishlist: #{wishlist}"
+	end
+
+
+	def inspect
+		"#{@pname}"
+	end
+
+
+	def self.clan_members(clan_name)
+		@@members.select {|person| person.clan == clan_name}
 	end
 
 
@@ -71,6 +86,8 @@ class Person
 	def self.output_members
 		@@members
 	end
+
+
 
 
 end
@@ -100,14 +117,15 @@ end
 
 #create some sample people and give them different clan attributes
 #this will eventually be done as part of accepting user data
-#keep a list of the clans used
+#create a list of the clans used / people created as each person is created
 
-
-participants = []
 
 a1 = Person.new("a1", "a")
-a1.collect
-a1.clan_collect
+a1.add
+
+#a1.collect
+#a1.clan_collect
+
 
 
 a2 = Person.new("a2", "a")
@@ -127,6 +145,7 @@ b1.clan_collect
 
 b2 = Person.new("b2", "b")
 b2.collect
+b2.clan_collect
 
 
 b3 = Person.new("b3", "b")
@@ -147,12 +166,31 @@ c2.clan_collect
 
 #access the array of all the Person class instances
 participants = Person.output_members
-p participants
+
+puts "Full list of participant details."
+participants.each do |person|
+	puts person.details
+end
 
 
 #access the array of all clan names
 clans = Person.output_clans
-p clans
+puts "clans: #{clans}"
+
+
+
+#create an array of each clan's members
+#but I want to create all three (or however many) using a loop
+clana = Person.clan_members("a")
+
+clanb = Person.clan_members("b")
+
+clanc = Person.clan_members("c")
+
+
+#create a hash using your new People instances?
+#clan name is key?
+#array of people instances is value?
 
 
 
@@ -163,8 +201,10 @@ p clans
 
 
 
-#create arrays using your new People instances - separated by clan
 #this is what the above method is supposed to do
+#need to rewrite from here to use a hash with arrays as values
+#instead of a series of arrays
+#if that's the method I'm going to try
 a = [a1,a2,a3]
 
 b = [b1,b2,b3]
