@@ -33,7 +33,6 @@ class Person
 
 	attr_accessor(:pname, :clan, :wishlist)
 
-
 	def initialize(pname, clan = "main", wishlist = "anything under £10")
 		@@clans ||= []
 		@@members ||= []
@@ -116,61 +115,45 @@ end
 
 
 #create some sample people and give them different clan attributes
-#this will eventually be done as part of accepting user data
+#****this will eventually be done as part of accepting user data****
+#****I also need to know how to create class instance variable names at runtime****
 #create a list of the clans used / people created as each person is created
 
 
 a1 = Person.new("a1", "a")
 a1.add
 
-#a1.collect
-#a1.clan_collect
-
-
-
 a2 = Person.new("a2", "a")
-a2.collect
-a2.clan_collect
-
+a2.add
 
 a3 = Person.new("a3", "a")
-a3.collect
-a3.clan_collect
-
+a3.add
 
 b1 = Person.new("b1", "b")
-b1.collect
-b1.clan_collect
-
+b1.add
 
 b2 = Person.new("b2", "b")
-b2.collect
-b2.clan_collect
-
+b2.add
 
 b3 = Person.new("b3", "b")
-b3.collect
-b3.clan_collect
-
+b3.add
 
 c1 = Person.new("c1", "c")
-c1.collect
-c1.clan_collect
-
+c1.add
 
 c2 = Person.new("c2", "c")
-c2.collect
-c2.clan_collect
-
+c2.add
 
 
 #access the array of all the Person class instances
+#not sure if I'll need this in the end....
+#commenting out output list while debugging to save scrolling
 participants = Person.output_members
 
-puts "Full list of participant details."
-participants.each do |person|
-	puts person.details
-end
+#puts "Full list of participant details."
+#participants.each do |person|
+#	puts person.details
+#end
 
 
 #access the array of all clan names
@@ -178,38 +161,19 @@ clans = Person.output_clans
 puts "clans: #{clans}"
 
 
-
 #create an array of each clan's members
+
+a = Person.clan_members("a")
+b = Person.clan_members("b")
+c = Person.clan_members("c")
+
 #but I want to create all three (or however many) using a loop
-clana = Person.clan_members("a")
-
-clanb = Person.clan_members("b")
-
-clanc = Person.clan_members("c")
-
-
-#create a hash using your new People instances?
-#clan name is key?
-#array of people instances is value?
 
 
 
 
 
 
-
-
-
-
-#this is what the above method is supposed to do
-#need to rewrite from here to use a hash with arrays as values
-#instead of a series of arrays
-#if that's the method I'm going to try
-a = [a1,a2,a3]
-
-b = [b1,b2,b3]
-
-c = [c1,c2]
 
 
 
