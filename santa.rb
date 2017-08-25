@@ -19,15 +19,11 @@
 #Part 3:
 #a way to link a name, clan and wishlist
 #data storage - YAML? need to learn about it and this seems like a good excuse
+#at the moment I'm not storing anything which is good for DPA but means no editing after entry
 
 #WORKING IDEAS HERE
 
-#start thinking about classes?
-#Person(name, clan, wishlist)??
-#a way to select people by clan
-#how to find out what the clans are?
-
-#but I want to get user input to create a person, HOW.
+#I want to get user input to create a person, HOW.
 
 class Person
 
@@ -46,8 +42,6 @@ class Person
 		collect
 		clan_collect
 	end
-
-
 
 
 	def clan_collect
@@ -168,8 +162,11 @@ b = Person.clan_members("b")
 c = Person.clan_members("c")
 
 #but I want to create all three (or however many) using a loop
+#or perhaps I need to create hashes, and then take the values of each hash to create my arrays?
 
 
+#or perhaps you could have arrays where the first item is the clan, and the rest are the person instances?
+#I don't know!
 
 
 
@@ -202,7 +199,7 @@ max_offset = people.length - min_offset
 if min_offset == people_count
 	offset = rand(1..min_offset)
 elsif if max_offset <= min_offset #check this logic - need a test for this!!!!!!!
-	offset = min_offset           #not at all sure this will work as designed when ==
+	offset = min_offset
 else
 	offset = rand(min_offset..max_offset)
 end
