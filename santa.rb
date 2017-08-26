@@ -18,12 +18,8 @@
 
 #Part 3:
 #a way to link a name, clan and wishlist
-#data storage - YAML? need to learn about it and this seems like a good excuse
-#at the moment I'm not storing anything which is good for DPA but means no editing after entry
 
-#WORKING IDEAS HERE
 
-#I want to get user input to create a person, HOW.
 
 class Person
 
@@ -97,6 +93,10 @@ def participants
 	participants = Person.output_members
 end
 
+
+#work out the offset range you are going to use when you rotate the array to minimise matching within tribes
+#care: if there is only one tribe you need to allow for random offsets within that tribe
+#this will need to be tidied up - not sure if it will work when there is only one tribe!
 def set_offset(people_count, min_offset, max_offset)
 	if min_offset == people_count
 	offset = rand(1..min_offset)
@@ -108,13 +108,8 @@ def set_offset(people_count, min_offset, max_offset)
 end
 
 #create some sample people and give them different clan attributes
-#****this will eventually be done as part of accepting user data****
-#****I also need to know how to create class instance variable names at runtime****
 #create a list of the clans used / people created as each person is created
-
-
-#create a new participant with attributes etc
-#you can then reuse this every time you need to add someone to the list.
+#you can then reuse the variable name every time you need to add someone to the list.
 a1 = new_participant("a1", "a")
 a1.add
 
@@ -147,6 +142,9 @@ a1.add
 
 
 #THINK ABOUT a method to do this by passing an array of arrays into it? Or data possibly from YAML or csv?
+#**********
+
+#**********
 
 
 #access the array of all the Person class instances
@@ -158,20 +156,25 @@ participants.each do |person|
 	puts person.details
 end
 
-#I'd like to turn this into a method like "list" if possible, but not sure how?
+#I'd like to turn this into a method like "list" if possible?
+#***************
+
 #***************
 
 
 
 
 #access the array of all clan names
+#probably worth putting this in a separate method??
 clans = Person.output_clans
 puts "clans: #{clans}"
 
+#*********
+
+#*********
+
 
 #create an array of each clan's members, and add that array to tribes
-
-
 
 
 tribes = []
@@ -185,6 +188,7 @@ end
 #again, I'd like to turn this into a method if possible?
 #*********************
 
+#*********************
 
 
 #sort tribes by size (biggest last):
@@ -198,9 +202,6 @@ people = sorted_tribes.flatten
 
 
 
-#work out the offset range you are going to use when you rotate the array to minimise matching within tribes
-#care: if there is only one tribe you need to allow for random offsets within that tribe
-#this will need to be tidied up - not sure if it will work when there is only one tribe!
 people_count = people.length
 
 min_offset = sorted_tribes[-1].length
@@ -222,10 +223,15 @@ p offset
 
 
 
-
-
 #extension  - Part 4:
 #create an input so that you can edit the list
+
+#WORKING THOUGHTS HERE
+
+#data storage - YAML? need to learn about it and this seems like a good excuse
+#at the moment I'm not storing anything which is good for DPA but means no editing after entry
+#I want to get user input to create a person, HOW.
+
 #input would ask people to select which group they were part of, or to add a new group if not there?
 
 #def user_input(arg)
@@ -233,6 +239,7 @@ p offset
 #	arg = gets.chomp
 #	arg
 #end
+
 
 
 #extension  - part 5:
