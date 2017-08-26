@@ -80,33 +80,32 @@ class Person
 		@@members
 	end
 
-
-
-
 end
 
-#maybe a clan class,
-#or would I be better off with a hash? that way I don't need to worry about names?
-class Clan
-	attr_accessor(:cname, :cmember)
-
-	def initialize(cname = "main")
-		@cname = cname
-		@cmember = cmember
-	end
-
-	def inspect
-		"#{@cname}"
-	end
-
-end
 
 
 #METHODS BELONGING TO THE PROGRAM NOT THE CLASS!
+def clanspeople(cname)
+	Person.clan_members(cname)
+end
 
+def new_participant(pname, clan, wishlist = "")
+	a1 = Person.new(pname, clan, wishlist)
+end
 
+def participants
+	participants = Person.output_members
+end
 
-
+def set_offset(people_count, min_offset, max_offset)
+	if min_offset == people_count
+	offset = rand(1..min_offset)
+	elsif max_offset <= min_offset #check this logic - need a test for this!!!!!!!
+		offset = min_offset
+	else
+		offset = rand(min_offset..max_offset)
+	end
+end
 
 #create some sample people and give them different clan attributes
 #****this will eventually be done as part of accepting user data****
@@ -114,40 +113,55 @@ end
 #create a list of the clans used / people created as each person is created
 
 
-a1 = Person.new("a1", "a")
+#create a new participant with attributes etc
+#you can then reuse this every time you need to add someone to the list.
+a1 = new_participant("a1", "a")
 a1.add
 
-a2 = Person.new("a2", "a")
-a2.add
+a1 = new_participant("a2", "a")
+a1.add
 
-a3 = Person.new("a3", "a")
-a3.add
+a1 = new_participant("a3", "a")
+a1.add
 
-b1 = Person.new("b1", "b")
-b1.add
+a1 = new_participant("b1", "b")
+a1.add
 
-b2 = Person.new("b2", "b")
-b2.add
+a1 = new_participant("b2", "b")
+a1.add
 
-b3 = Person.new("b3", "b")
-b3.add
+a1 = new_participant("b3", "b")
+a1.add
 
-c1 = Person.new("c1", "c")
-c1.add
+a1 = new_participant("c1", "c")
+a1.add
 
-c2 = Person.new("c2", "c")
-c2.add
+a1 = new_participant("d1", "d")
+a1.add
+
+a1 = new_participant("e1", "e")
+a1.add
+
+a1 = new_participant("e2", "e")
+a1.add
+
+
+#THINK ABOUT a method to do this by passing an array of arrays into it? Or data possibly from YAML or csv?
 
 
 #access the array of all the Person class instances
 #not sure if I'll need this in the end....
-#commenting out output list while debugging to save scrolling
-participants = Person.output_members
 
-#puts "Full list of participant details."
-#participants.each do |person|
-#	puts person.details
-#end
+puts "Full list of participant details."
+participants.sort_by!{|person| [person.clan, person.pname]}
+participants.each do |person|
+	puts person.details
+end
+
+#I'd like to turn this into a method like "list" if possible, but not sure how?
+#***************
+
+
 
 
 #access the array of all clan names
@@ -155,30 +169,26 @@ clans = Person.output_clans
 puts "clans: #{clans}"
 
 
-#create an array of each clan's members
-
-a = Person.clan_members("a")
-b = Person.clan_members("b")
-c = Person.clan_members("c")
-
-#but I want to create all three (or however many) using a loop
-#or perhaps I need to create hashes, and then take the values of each hash to create my arrays?
-
-
-#or perhaps you could have arrays where the first item is the clan, and the rest are the person instances?
-#I don't know!
+#create an array of each clan's members, and add that array to tribes
 
 
 
 
+tribes = []
+clan_number = 0
+while clan_number < clans.length do
+	clan0 = clanspeople(clans[clan_number])
+	tribes << clan0.shuffle!
+	clan_number +=1
+end
+
+#again, I'd like to turn this into a method if possible?
+#*********************
 
 
 
+#sort tribes by size (biggest last):
 
-#shuffle the members of each tribe to give a random order
-#AND sort tribes by size (biggest last):
-
-tribes = [a.shuffle,b.shuffle,c.shuffle]
 sorted_tribes = tribes.sort_by(&:length)
 
 largest_tribe = sorted_tribes[-1]
@@ -196,13 +206,9 @@ people_count = people.length
 min_offset = sorted_tribes[-1].length
 max_offset = people.length - min_offset
 
-if min_offset == people_count
-	offset = rand(1..min_offset)
-elsif if max_offset <= min_offset #check this logic - need a test for this!!!!!!!
-	offset = min_offset
-else
-	offset = rand(min_offset..max_offset)
-end
+offset = set_offset(people_count, min_offset, max_offset)
+
+
 
 recipients = people.rotate(offset)
 
@@ -213,7 +219,6 @@ list = Hash[people.zip recipients]
 p list
 p offset
 
-end
 
 
 
@@ -235,6 +240,9 @@ end
 #the result is emailed to all the participants
 #you'll still need an organiser, so the website won't store any user data once the emails
 #have been sent, as otherwise DPA gets involved???
+
+
+#NB with the new data protection rules, you need explicit permission to even PROCESS data????
 
 
 
