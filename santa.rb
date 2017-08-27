@@ -110,41 +110,49 @@ end
 #create some sample people and give them different clan attributes
 #create a list of the clans used / people created as each person is created
 #you can then reuse the variable name every time you need to add someone to the list.
-a1 = new_participant("a1", "a")
-a1.add
+#a1 = new_participant("a1", "a")
+#a1.add
 
-a1 = new_participant("a2", "a")
-a1.add
+#a1 = new_participant("a2", "a")
+#a1.add
 
-a1 = new_participant("a3", "a")
-a1.add
+#a1 = new_participant("a3", "a")
+#a1.add
 
-a1 = new_participant("b1", "b")
-a1.add
+#a1 = new_participant("b1", "b")
+#a1.add
 
-a1 = new_participant("b2", "b")
-a1.add
+#a1 = new_participant("b2", "b")
+#a1.add
 
-a1 = new_participant("b3", "b")
-a1.add
+#a1 = new_participant("b3", "b")
+#a1.add
 
-a1 = new_participant("c1", "c")
-a1.add
+#a1 = new_participant("c1", "c")
+#a1.add
 
-a1 = new_participant("d1", "d")
-a1.add
+#a1 = new_participant("d1", "d")
+#a1.add
 
-a1 = new_participant("e1", "e")
-a1.add
+#a1 = new_participant("e1", "e")
+#a1.add
 
-a1 = new_participant("e2", "e")
-a1.add
+#a1 = new_participant("e2", "e")
+#a1.add
 
 
-#THINK ABOUT a method to do this by passing an array of arrays into it? Or data possibly from YAML or csv?
+#THINK ABOUT a method to do this by passing an array of arrays into it?
+#Or data possibly from YAML or csv?
 #**********
 
-#**********
+everyone = [["a1", "a"], ["a2", "a"], ["a3", "a"], ["b1", "b"], ["b2", "b"], ["b3", "b", "chocolate"], ["c1", "c", "whisky"], ["c2", "c"]]
+
+#*********
+
+everyone.each do |person|
+	a1 = new_participant(person[0], person[1], person[2])
+	a1.add
+end
 
 
 #access the array of all the Person class instances
@@ -219,6 +227,8 @@ list = Hash[people.zip recipients]
 
 p list
 p offset
+
+
 
 
 
