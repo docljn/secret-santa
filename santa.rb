@@ -16,8 +16,8 @@
 
 ####################
 
-#Part 3:
-#a way to link a name, clan and wishlist
+#Part 3: DONE BUT REFACTORING
+#a way to link a name, clan and wishlist for each participant
 
 
 
@@ -25,7 +25,7 @@ class Person
 
 	attr_accessor(:pname, :clan, :wishlist)
 
-	def initialize(pname, clan = "main", wishlist = "anything under £10")
+	def initialize(pname, clan, wishlist)
 		@@clans ||= []
 		@@members ||= []
 		@pname = pname
@@ -53,11 +53,13 @@ class Person
 
 
 	def details
-		"clan: #{clan}, pname: #{pname}, wishlist: #{wishlist}"
+		"Person Name: #{pname}, Clan: #{clan}, Wishlist: #{wishlist}"
 	end
 
 
 	def inspect
+		#means I can get the person name output rather than the entire object,
+		#which makes reading the output a lot easier
 		"#{@pname}"
 	end
 
@@ -81,25 +83,70 @@ end
 
 
 #METHODS BELONGING TO THE PROGRAM NOT THE CLASS!
+
+def clans
+	#access the array of all clan names
+	Person.output_clans
+end
+
+
 def clanspeople(cname)
+	#access the members of the class who belong to a particular clan
 	Person.clan_members(cname)
 end
 
-def new_participant(pname, clan, wishlist = "")
+
+
+def fill_array(target_array, source_array, counter = 0)
+	#create an array of each clan's members, and add that array to tribes (the target_array)
+	#target_array ||=[] - why doesn't this work if I don't initialize 'tribes' outside the method?
+	while counter < source_array.length do
+		clan0 = clanspeople(source_array[counter])
+		counter +=1
+		target_array << clan0.shuffle!
+	end
+	p target_array
+end
+
+#list method works with passing just the array name but I want to be able to set the sort_by option
+#at run time and when I try adding the clan and pname fields to the arguments it doesn't work!
+def list(array)
+	#access and output the array of all the Person class instances sorted by clan and name
+	array.sort_by! {|array_item| [array_item.clan, array_item.pname] }
+	array.each {|array_item| puts array_item.details}
+end
+
+#***************
+#trying again to get clan and pname to be arguments of the method, rather than hard coded
+#STUCK!
+
+#puts "testing list method with three arguments"
+#def list_args(array, sorter1, sorter2)
+#	array.sort_by! {|array_item| [array_item.sorter1, array_item.sorter2]}
+#end
+#p list(participants, clan, pname)
+
+#***************
+
+
+def new_participant(pname, clan, wishlist)
+	#create a new instance of Person class with desired atßtributes
 	a1 = Person.new(pname, clan, wishlist)
 end
 
+
 def participants
+	#access all members of the Person class
 	participants = Person.output_members
 end
 
 
-#work out the offset range you are going to use when you rotate the array to minimise matching within tribes
-#care: if there is only one tribe you need to allow for random offsets within that tribe
-#this will need to be tidied up - not sure if it will work when there is only one tribe!
 def set_offset(people_count, min_offset, max_offset)
+	#work out the offset you are going to use when you rotate the array to minimise matching within tribes
+	#care: if there is only one tribe you need to allow for random offsets within that tribe
+	#this will need to be tidied up - not sure if it will work when there is only one tribe!
 	if min_offset == people_count
-	offset = rand(1..min_offset)
+		offset = rand(1..min_offset)
 	elsif max_offset <= min_offset #check this logic - need a test for this!!!!!!!
 		offset = min_offset
 	else
@@ -107,118 +154,53 @@ def set_offset(people_count, min_offset, max_offset)
 	end
 end
 
+#END OF PROGRAM METHODS
+
+#START OF ACTUAL CODE
+
 #create some sample people and give them different clan attributes
 #create a list of the clans used / people created as each person is created
 #you can then reuse the variable name every time you need to add someone to the list.
-#a1 = new_participant("a1", "a")
-#a1.add
+#because the pointer is now coming from the array rather than from the variable
+#brain overload
 
-#a1 = new_participant("a2", "a")
-#a1.add
-
-#a1 = new_participant("a3", "a")
-#a1.add
-
-#a1 = new_participant("b1", "b")
-#a1.add
-
-#a1 = new_participant("b2", "b")
-#a1.add
-
-#a1 = new_participant("b3", "b")
-#a1.add
-
-#a1 = new_participant("c1", "c")
-#a1.add
-
-#a1 = new_participant("d1", "d")
-#a1.add
-
-#a1 = new_participant("e1", "e")
-#a1.add
-
-#a1 = new_participant("e2", "e")
-#a1.add
-
-
-#THINK ABOUT a method to do this by passing an array of arrays into it?
-#Or data possibly from YAML or csv?
-#**********
-
-everyone = [["a1", "a"], ["a2", "a"], ["a3", "a"], ["b1", "b"], ["b2", "b"], ["b3", "b", "chocolate"], ["c1", "c", "whisky"], ["c2", "c"]]
-
-#*********
+#this is a shortcut to save me typing everything in
+#eventually this should probably be a csv / YAML data store?
+everyone = [["a1", "a"], ["b2", "b"], ["c3", "c"], ["b1", "b"], ["a2", "a"], ["b3", "b", "chocolate"], ["c1", "c", "whisky"], ["c2", "c"]]
 
 everyone.each do |person|
-	a1 = new_participant(person[0], person[1], person[2])
+	a1 = new_participant(person[0], person[1]||="no clan given", person[2]||="Anything under £10.")
+  #does this work because ruby is forgiving?
 	a1.add
+	#this outputs the 'participants' array and the 'clans' array
 end
 
 
 #access the array of all the Person class instances
-#not sure if I'll need this in the end....
-
-puts "Full list of participant details."
-participants.sort_by!{|person| [person.clan, person.pname]}
-participants.each do |person|
-	puts person.details
-end
-
-#I'd like to turn this into a method like "list" if possible?
-#***************
-
-#***************
-
-
-
+list(participants)
 
 #access the array of all clan names
-#probably worth putting this in a separate method??
-clans = Person.output_clans
-puts "clans: #{clans}"
+clans
 
-#*********
-
-#*********
-
-
-#create an array of each clan's members, and add that array to tribes
-
-
+#create an array of arrays, where each array contains the members of a single clan
 tribes = []
-clan_number = 0
-while clan_number < clans.length do
-	clan0 = clanspeople(clans[clan_number])
-	tribes << clan0.shuffle!
-	clan_number +=1
-end
-
-#again, I'd like to turn this into a method if possible?
-#*********************
-
-#*********************
-
+fill_array(tribes, clans)
 
 #sort tribes by size (biggest last):
-
 sorted_tribes = tribes.sort_by(&:length)
-
-largest_tribe = sorted_tribes[-1]
 
 #list of all participants, in randomly ordered tribes
 people = sorted_tribes.flatten
 
-
-
+#generate settings for rotation
 people_count = people.length
-
 min_offset = sorted_tribes[-1].length
 max_offset = people.length - min_offset
 
+#actually work out the offset for rotation
 offset = set_offset(people_count, min_offset, max_offset)
 
-
-
+#recipients are generated by rotating the array by the offset so that everyone gets a non-self partner
 recipients = people.rotate(offset)
 
 #create a giver<->recipient reference list
@@ -234,7 +216,7 @@ p offset
 
 
 #extension  - Part 4:
-#create an input so that you can edit the list
+#create an input/output interface so that you can edit the list and accept data from users
 
 #WORKING THOUGHTS HERE
 
