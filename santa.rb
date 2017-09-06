@@ -84,7 +84,7 @@ end
 
 #METHODS BELONGING TO THE PROGRAM NOT THE CLASS!
 
-def clans
+def clans_list
 	#access the array of all clan names
 	Person.output_clans
 end
@@ -105,7 +105,7 @@ def fill_array(target_array, source_array, counter = 0)
 		counter +=1
 		target_array << clan0.shuffle!
 	end
-	p target_array
+	target_array
 end
 
 #list method works with passing just the array name but I want to be able to set the sort_by option
@@ -130,7 +130,7 @@ end
 
 
 def new_participant(pname, clan, wishlist)
-	#create a new instance of Person class with desired atßtributes
+	#create a new instance of Person class with desired attributes
 	a1 = Person.new(pname, clan, wishlist)
 end
 
@@ -160,9 +160,6 @@ end
 
 #create some sample people and give them different clan attributes
 #create a list of the clans used / people created as each person is created
-#you can then reuse the variable name every time you need to add someone to the list.
-#because the pointer is now coming from the array rather than from the variable
-#brain overload
 
 #this is a shortcut to save me typing everything in
 #eventually this should probably be a csv / YAML data store?
@@ -176,15 +173,16 @@ everyone.each do |person|
 end
 
 
-#access the array of all the Person class instances
+#access and output the array of all the Person class instances
+#allows the organiser to check for erros
 list(participants)
 
-#access the array of all clan names
-clans
+#access the array of all clan names (no need to output)
+clans_list
 
-#create an array of arrays, where each array contains the members of a single clan
+#create an array of arrays, where each internal array contains the members of a single clan
 tribes = []
-fill_array(tribes, clans)
+fill_array(tribes, clans_list)
 
 #sort tribes by size (biggest last):
 sorted_tribes = tribes.sort_by(&:length)
@@ -192,7 +190,8 @@ sorted_tribes = tribes.sort_by(&:length)
 #list of all participants, in randomly ordered tribes
 people = sorted_tribes.flatten
 
-#generate settings for rotation
+#generate settings for rotation to minimise giving within clans
+#can I turn this into a method?????
 people_count = people.length
 min_offset = sorted_tribes[-1].length
 max_offset = people.length - min_offset
@@ -206,8 +205,9 @@ recipients = people.rotate(offset)
 #create a giver<->recipient reference list
 list = Hash[people.zip recipients]
 
-
+puts "Giver:Recipient pairs"
 p list
+puts "Offset:"
 p offset
 
 
@@ -229,18 +229,16 @@ p offset
 #def user_input(arg)
 #	puts "Please enter your #{arg}: "
 #	arg = gets.chomp
-#	arg
 #end
 
 
 
 #extension  - part 5:
 #nake a single page website where you can add name, clan, email, wishlist and
-#the result is emailed to all the participants
+#the result is emailed to all the participants (i.e. each receives their recipient and the recipient's wishlist)
 #you'll still need an organiser, so the website won't store any user data once the emails
 #have been sent, as otherwise DPA gets involved???
-
-
+#need to check what is needed for processing of user information
 #NB with the new data protection rules, you need explicit permission to even PROCESS data????
 
 
