@@ -16,10 +16,31 @@
 
 ####################
 
-#Part 3: DONE BUT REFACTORING
+#Part 3: DONE BUT REFACTORING TO DO
 #a way to link a name, clan and wishlist for each participant
 
+####################
 
+#Part 4:
+#create an input/output interface so that you can accept data from users
+#and a way to edit the list
+
+#WORKING THOUGHTS HERE
+#once a person has been added, output to screen
+#and add to the displayed list each time you add a person
+#find a way to edit a person if you've made a mistake
+
+#give a choice of clan/team/family from those already entered, or 0 to add a new one
+
+#data storage - YAML? need to learn about it and this seems like a good excuse
+#at the moment I'm not storing anything which is good for DPA but means no editing after entry
+
+
+
+
+
+
+#####################
 
 class Person
 
@@ -163,6 +184,34 @@ end
 
 #this is a shortcut to save me typing everything in
 #eventually this should probably be a csv / YAML data store?
+#and the input will write to this each time a new person is added?
+
+#####
+
+
+
+#Working out how to add a participant via the command line:
+reqs = ["full name", "clan/team/family", "wishlist"]
+attributes = []
+everyone = []
+
+reqs.each do |attr|
+	puts "Please enter the participant's #{attr}: "
+	puts "(If this does not apply, please press 'enter'.)"
+  attributes << gets.chomp
+end
+
+
+test_person = new_participant(attributes[0], attributes[1], attributes[2])
+test_person.add
+list(participants)
+
+
+
+
+#####
+
+
 everyone = [["a1", "a"], ["b2", "b"], ["c3", "c"], ["b1", "b"], ["a2", "a"], ["b3", "b", "chocolate"], ["c1", "c", "whisky"], ["c2", "c"]]
 
 everyone.each do |person|
@@ -215,21 +264,7 @@ p offset
 
 
 
-#extension  - Part 4:
-#create an input/output interface so that you can edit the list and accept data from users
 
-#WORKING THOUGHTS HERE
-
-#data storage - YAML? need to learn about it and this seems like a good excuse
-#at the moment I'm not storing anything which is good for DPA but means no editing after entry
-#I want to get user input to create a person, HOW.
-
-#input would ask people to select which group they were part of, or to add a new group if not there?
-
-#def user_input(arg)
-#	puts "Please enter your #{arg}: "
-#	arg = gets.chomp
-#end
 
 
 
