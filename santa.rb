@@ -23,17 +23,12 @@
 
 #Part 4:
 #create an input/output interface so that you can accept data from users
+
 #and a way to edit the list
 
 #WORKING THOUGHTS HERE
 #once a person has been added, output to screen
 #and add to the displayed list each time you add a person
-#find a way to edit a person if you've made a mistake
-
-#give a choice of clan/team/family from those already entered, or 0 to add a new one
-
-#data storage - YAML? need to learn about it and this seems like a good excuse
-#at the moment I'm not storing anything which is good for DPA but means no editing after entry
 
 
 
@@ -118,12 +113,12 @@ end
 
 
 
-def fill_array(target_array, source_array, counter = 0)
+def fill_array(target_array, source_array, position = 0)
 	#create an array of each clan's members, and add that array to tribes (the target_array)
 	#target_array ||=[] - why doesn't this work if I don't initialize 'tribes' outside the method?
-	while counter < source_array.length do
-		clan0 = clanspeople(source_array[counter])
-		counter +=1
+	while position < source_array.length do
+		clan0 = clanspeople(source_array[position])
+		position +=1
 		target_array << clan0.shuffle!
 	end
 	target_array
@@ -143,22 +138,22 @@ end
 
 #puts "testing list method with three arguments"
 #def list_args(array, sorter1, sorter2)
-#	array.sort_by! {|array_item| [array_item.sorter1, array_item.sorter2]}
+#	array.sort_by! {|array_item, sorter1, sorter2| [array_item.sorter1, array_item.sorter2]}
 #end
-#p list(participants, clan, pname)
+#p list_args(participants, clan, pname)
 
 #***************
 
 
 def new_participant(pname, clan, wishlist)
 	#create a new instance of Person class with desired attributes
-	a1 = Person.new(pname, clan, wishlist)
+	Person.new(pname, clan, wishlist)  #don't need to give it a variable name if you're not doing anything with it.
 end
 
 
 def participants
 	#access all members of the Person class
-	participants = Person.output_members
+	Person.output_members
 end
 
 
@@ -187,8 +182,13 @@ end
 
 options_hash = {1 => "add a participant", 2 => "generate the list of givers and recipients", 3 => "quit and delete all records"}
 option = 0
+everyone = [] #collection of all Persons
+reqs = ["full name", "clan/team/family", "wishlist"] #attributes needed to initialize a person (eventually add email?)
 
 
+#######
+#I want to find a way to only allow generation of a list of pairs once there are at least 3 participants
+#######
 
 while option <2
 
@@ -199,18 +199,16 @@ while option <2
   option = gets.chomp.to_i #anything that isn't an integer will be set to 0
 
 
-	everyone = [] #collection of all Persons
-	reqs = ["full name", "clan/team/family", "wishlist"] #attributes needed to initialize a person (eventually add email?)
 
 
 	if option == 1
-		##Working out how to add a single participant via the commandline:
+		## add a single participant via the commandline:
 	  attributes = []
 
 		reqs.each do |attr|
 			puts "Please enter the participant's #{attr}: "
 			puts "(If this does not apply, please press 'enter'.)"
-		  attributes << gets.chomp
+		  attributes << gets.chomp  #maybe think about a hash rather than an array? then you could call by name not position
 		end
 
 
@@ -219,8 +217,9 @@ while option <2
 		list(participants)
 
   elsif option == 2
-		#I NEED SOMETHING TO TRAP THIS IF THERE ARE NO PEOPLE ADDED!
+		#I NEED SOMETHING TO TRAP THIS IF THERE ARE NO PEOPLE ADDED! (or only give the option once there are 3 people)
 		#run the rest of the program
+
 		#access the array of all clan names (no need to output)
 	  clans_list
 
@@ -265,16 +264,28 @@ end
 
 
 
+#extension - part 5:
+#find a way to edit a person if you've made a mistake, or just delete and start again?
+#give a choice of clan/team/family from those already entered, or 0 to add a new one?
+#minimises typos
+#data storage - YAML? need to learn about it and this seems like a good excuse
+#at the moment I'm not storing anything which is good for DPA but means no editing after entry
 
 
 
 
-#extension  - part 5:
+#extension  - part 6:
 #nake a single page website where you can add name, clan, email, wishlist and
 #the result is emailed to all the participants (i.e. each receives their recipient and the recipient's wishlist)
 #you'll still need an organiser, so the website won't store any user data once the emails
 #have been sent, as otherwise DPA gets involved???
 #need to check what is needed for processing of user information
 #NB with the new data protection rules, you need explicit permission to even PROCESS data????
+
+#extension - part 7:
+#have the website be set up by an organiser, then anyone can go to the site and add their own details
+#once that is complete, the organiser only can click a button to send the emails out to everyone
+#the organiser can edit everyone
+#participants can only edit their own details while they are on the page
 
 
